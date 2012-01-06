@@ -230,6 +230,7 @@ module AssetTags
     size = options.delete('size') || 'original'
     raise TagError, "asset #{tag.locals.asset.title} has no '#{size}' thumbnail" unless tag.locals.asset.has_style?(size)
     options['alt'] ||= tag.locals.asset.title
+    options['title'] ||= tag.locals.asset.caption unless tag.locals.asset.caption.blank?
     if tag.locals.asset.dimensions_known?
       geo = tag.locals.asset.geometry(size)
       options['width']  ||= geo.width.to_i.to_s
